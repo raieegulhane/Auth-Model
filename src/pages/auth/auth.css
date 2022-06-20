@@ -1,0 +1,72 @@
+.auth-form-wrapper {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    width: 350px;
+}
+
+.auth-heading {
+    color: var(--blue);
+    text-decoration: underline;
+    text-decoration-color: var(--grey2);
+    padding-bottom: 1rem;
+}
+
+.auth-form {
+    gap: 1rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+}
+
+.auth-label {
+    color: var(--grey);
+    gap: 4px;
+}
+
+.inp {
+    font-size: 1rem;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--blue);
+    border-radius: 7px;
+}
+
+.inp::placeholder {
+    color: var(--grey2);
+}
+
+.form-btn-container {
+    gap: 0.25rem;
+}
+
+.btn {
+    font-size: 1rem;
+    padding: 0.25rem 1rem;
+    border: 2px solid var(--blue);
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    border-color: var(--blue2);
+}
+
+.pri-btn {
+    background-color: var(--blue);
+    color: white;
+}
+
+.pri-btn:hover {
+    background-color: var(--blue2);
+}
+
+.sec-btn {
+    background-color: transparent;
+    color: var(--blue);
+}
+
+.sec-btn {
+    color: var(--blue2);
+}
