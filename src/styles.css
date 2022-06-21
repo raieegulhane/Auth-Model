@@ -1,7 +1,9 @@
+@import url('react-toastify/dist/ReactToastify.css');
+
 :root {
     --blue:#0099ff;
     --blue2: #3eb2ff;
-    --grey: #646464;
+    --grey: #767676;
     --grey2: #c5c5c5;
 }
 

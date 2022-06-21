@@ -1,10 +1,14 @@
 import "./styles.css";
-import { Login } from "./pages";
+import { ToastContainer } from "react-toastify";
+import { SiteRoutes } from "./routes"
+import { useToast } from "./custom-hook";
 
 function App() {
+  const { showToast } = useToast();
   return (
     <div className="App">
-      <Login />
+      <ToastContainer />
+      <SiteRoutes />
     </div>
   );
 }
