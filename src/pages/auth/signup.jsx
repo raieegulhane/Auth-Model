@@ -42,6 +42,7 @@ export const Signup = () => {
                 return;
             }
 
+            
             showToast("error", "Error occured while signing in.");
         }
     }
