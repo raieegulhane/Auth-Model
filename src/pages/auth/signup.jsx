@@ -1,9 +1,51 @@
 import "./auth.css"
 import "../../styles.css";
 import { useState } from "react";
+import { signupService } from "../../services/signup-service";
+import { useToast } from "../../custom-hook";
 
-export const Login = () => {
+export const Signup = () => {
+    const { showToast } = useToast();
     
+    const initialUserDetails = {
+        email: "",
+        password: "",
+        confirmPassword: "",
+        firstName: "",
+        lastName: ""
+    }
+    const [ userDetails, setUserDetails ] = useState(initialUserDetails);
+    const {
+        email,
+        password,
+        confirmPassword,
+        firstName,
+        lastName
+    } = userDetails;
+
+    const updateUserDetails = (event) => {
+        const { name, value } = event.target;
+        setUserDetails((userDetails) => ({ ...userDetails, [name]: value }))
+    }
+
+    const signupHandler = async (event) => {
+        event.preventDefault();
+
+        try {
+            const response = await signupService(userDetails);
+            const { createdUser, encodecToken } = response.data;
+            localStorage.setItem("auth-token", encodecToken);
+        } catch (error) {
+            console.log("SIGNUP_ERROR: ", error);
+            if (error.message.includes(422)) {
+                showToast("error", "Email already exists. Login instead")
+                return;
+            }
+
+            showToast("error", "Error occured while signing in.");
+        }
+    }
+
 
     return(
         <div className="auth-form-wrapper">
@@ -16,12 +58,14 @@ export const Login = () => {
                 >
                     First Name: 
                     <input 
+                        id="firstName"
                         className="inp"
                         name="firstName"
                         type="text"
                         placeholder="Jane"
                         required
-                        // value={email}
+                        onChange={updateUserDetails}
+                        value={firstName}
                     />
                 </label>
                 <label
@@ -30,12 +74,14 @@ export const Login = () => {
                 >
                     Last Name: 
                     <input 
+                        id="lastName"
                         className="inp"
                         name="lastName"
                         type="text"
                         placeholder="Doe"
                         required
-                        // value={email}
+                        onChange={updateUserDetails}
+                        value={lastName}
                     />
                 </label>
                 <label
@@ -44,45 +90,51 @@ export const Login = () => {
                 >
                     Email: 
                     <input 
+                        id="email"
                         className="inp"
                         name="email"
                         type="email"
                         placeholder="email@example.com"
                         required
-                        // value={email}
+                        onChange={updateUserDetails}
+                        value={email}
                     />
                 </label>
                 <label
                     className="auth-label flex-col"
                     htmlFor="newPassword"
                 >
-                    Password:
+                    New Password:
                     <input
+                        id="newPassword"
                         className="inp"
-                        name="newPassword"
+                        name="password"
                         type="password"
                         placeholder="******" 
                         required
-                        // value={password}                   
+                        onChange={updateUserDetails}
+                        value={password}
                     />
                 </label>
                 <label
                     className="auth-label flex-col"
                     htmlFor="confirmPassword"
                 >
-                    Password:
+                    Confirm Password:
                     <input
                         className="inp"
                         name="confirmPassword"
                         type="password"
                         placeholder="Re-enter password" 
                         required
-                        // value={password}                   
+                        onChange={updateUserDetails}
+                        value={confirmPassword}
                     />
                 </label>
                 <div className="form-btn-container flex-col">
                     <button
                         className="auth-btn pri-btn btn"
+                        onClick={signupHandler}
                     >
                         Continue
                     </button>
