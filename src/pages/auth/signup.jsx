@@ -1,12 +1,17 @@
 import "./auth.css"
 import "../../styles.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"
 import { signupService } from "../../services/signup-service";
+import { useAuth } from "../../contexts/auth-context";
 import { useToast } from "../../custom-hook";
 
 export const Signup = () => {
     const { showToast } = useToast();
-    
+
+    const { authState, authDispatch } = useAuth();
+    const { authToken } = authState;
+
     const initialUserDetails = {
         email: "",
         password: "",
@@ -32,16 +37,30 @@ export const Signup = () => {
         event.preventDefault();
 
         try {
+            if (!email || !password || !confirmPassword || !firstName || !lastName) {
+                showToast("warning", "All fields must be filled.");
+                return;
+            }
+
             const response = await signupService(userDetails);
-            const { createdUser, encodecToken } = response.data;
-            localStorage.setItem("auth-token", encodecToken);
+            const { createdUser, encodedToken } = response.data;
+
+            authDispatch({
+                type: "AUTH_INIT",
+                payload: {
+                    isAuth: true,
+                    authToken: encodedToken,
+                    userData: { ...createdUser }
+                }
+            })
+
+            localStorage.setItem("auth-token", authToken);
         } catch (error) {
             console.log("SIGNUP_ERROR: ", error);
             if (error.message.includes(422)) {
                 showToast("error", "Email already exists. Login instead")
                 return;
             }
-
             
             showToast("error", "Error occured while signing in.");
         }
