@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Mockman from 'mockman-js';
 import { Home, Private1, Private2, Private3, Login, Signup, NotFound } from "../pages";
+import { PrivateRoutes } from ".";
 
 export const SiteRoutes = () => {
     return(
@@ -9,11 +10,13 @@ export const SiteRoutes = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="*" element={<NotFound />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/private1" element={<Private1 />} />
-            <Route path="/private2" element={<Private2 />} />
-            <Route path="/private3" element={<Private3 />} />
+            <Route path="/" element={<PrivateRoutes />}>
+                <Route path="/home" element={<Home />} />
+                <Route path="/private1" element={<Private1 />} />
+                <Route path="/private2" element={<Private2 />} />
+                <Route path="/private3" element={<Private3 />} />
+            </Route>
+            
         </Routes>
     );
 }
