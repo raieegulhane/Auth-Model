@@ -1,7 +1,7 @@
 import "./auth.css"
 import "../../styles.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { signupService } from "../../services/signup-service";
 import { useAuth } from "../../contexts/auth-context";
 import { useToast } from "../../custom-hook";
@@ -160,6 +160,7 @@ export const Signup = () => {
                     </button>
                 </div>
             </form>
+            <p className="alt-cta">Already an user? <Link to="/login" className="alt-cta-btn">Login</Link> to your account</p>
         </div>
     );
 }

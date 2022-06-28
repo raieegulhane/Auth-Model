@@ -1,7 +1,9 @@
+import "./pages.css";
+
 export const Home = () => {
     return(
-        <div>
+        <h1 className="content">
             HOME - PUBLIC
-        </div>
+        </h1>
     );
 }

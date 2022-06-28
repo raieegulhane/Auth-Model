@@ -71,3 +71,22 @@
 .sec-btn {
     color: var(--blue2);
 }
+
+.alt-cta {
+    color: var(--grey);
+    text-align: center;
+    padding: 1rem;
+}
+
+.alt-cta-btn {
+    background-color: transparent;
+    color: var(--blue);
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+.alt-cta-btn:hover {
+    color: var(--blue2);
+    font-weight: bold;
+}

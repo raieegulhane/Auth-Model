@@ -1,7 +1,9 @@
+import "./pages.css";
+
 export const Private3 = () => {
     return(
-        <div>
+        <h1 className="content">
             PRIVATE PAGE 3
-        </div>
+        </h1>
     );
 }

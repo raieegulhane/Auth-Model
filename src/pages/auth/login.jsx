@@ -1,6 +1,7 @@
 import "./auth.css"
 import "../../styles.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const Login = () => {
     const initialLoginCreds = { email: "", password: "" };
@@ -53,6 +54,8 @@ export const Login = () => {
                     </button>
                 </div>
             </form>
+
+            <p className="alt-cta">New user? <Link to="/signup" className="alt-cta-btn" >Sign Up</Link> here.</p>
         </div>
     );
 }
