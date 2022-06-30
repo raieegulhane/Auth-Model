@@ -5,8 +5,6 @@ import { useAuth } from "../contexts/auth-context";
 export const PrivateRoutes = () => {
     const location = useLocation();
     const { authState: { isAuth } } = useAuth();
-    console.log(location)
-    console.log(isAuth)
 
     return(
         isAuth ? (

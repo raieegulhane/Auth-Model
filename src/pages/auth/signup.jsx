@@ -1,6 +1,6 @@
 import "./auth.css"
 import "../../styles.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom"
 import { signupService } from "../../services/signup-service";
 import { useAuth } from "../../contexts/auth-context";
@@ -12,8 +12,7 @@ export const Signup = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const { authState, authDispatch } = useAuth();
-    const { isAuth, authToken } = authState;
+    const { authDispatch } = useAuth();
 
     const initialUserDetails = {
         email: "",
@@ -35,10 +34,6 @@ export const Signup = () => {
         const { name, value } = event.target;
         setUserDetails((userDetails) => ({ ...userDetails, [name]: value }))
     }
-
-    useEffect(() => {
-        isAuth && navigate("/home", { replace: true});
-    }, [isAuth]);
 
     const signupHandler = async (event) => {
         event.preventDefault();
@@ -69,7 +64,10 @@ export const Signup = () => {
 
             //here we use the function navigate and not Navigate because we have to go to the requred page on click.
             //it acts kinda like Link but without the link name
-            navigate("/home", {replace: true});
+            // For applications like notes app where navbar is in private pages only direct navigation to
+            // home page from signup is okay. but for apps like ecomm where nav is publically accesssed you should return to
+            // the location from where you started.
+            navigate(location?.state?.from ? location.state.from : "/home", {replace: true});
             showToast("success", "Signed up");
         } catch (error) {
             console.log("SIGNUP_ERROR: ", error);
@@ -151,8 +149,8 @@ export const Signup = () => {
                 {
                     password.length !== 0 && 
                     password.length < 6 &&
-                    <div className="pw-warning">
-                        <i class="fa-solid fa-circle-exclamation"></i>
+                    <div className="warning">
+                        <i className="fa-solid fa-circle-exclamation"></i>
                         <p>Password should have atleast 6 characters</p>
                     </div>
                 }
@@ -172,8 +170,8 @@ export const Signup = () => {
                 {
                     confirmPassword.length > 0 &&
                     password !== confirmPassword &&
-                    <div className="pw-warning">
-                        <i class="fa-solid fa-circle-exclamation"></i>
+                    <div className="warning">
+                        <i className="fa-solid fa-circle-exclamation"></i>
                         <p>Passwords do not match.</p>
                     </div>
                 }

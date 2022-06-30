@@ -29,13 +29,13 @@ export const PasswordInput = ({ id, name, placeholder, value, onChange }) => {
                     className="pw-hide-btn"
                     onClick={pwVisibilityHandler}
                 >
-                    <i class="fa-solid fa-eye-slash"></i>
+                    <i className="fa-solid fa-eye-slash"></i>
                 </button> :
                 <button 
                     className="pw-hide-btn"
                     onClick={pwVisibilityHandler}
                 >
-                    <i class="fa-solid fa-eye"></i>
+                    <i className="fa-solid fa-eye"></i>
                 </button>
             }
         </div>

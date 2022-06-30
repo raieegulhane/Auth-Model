@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const loginService = (userEmail) => {
-    const response = axios.post("/api/auth/login", userEmail);
+export const loginService = (loginCreds) => {
+    const response = axios.post("/api/auth/login", loginCreds);
     return(response);
 }
