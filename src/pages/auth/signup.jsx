@@ -5,6 +5,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom"
 import { signupService } from "../../services/signup-service";
 import { useAuth } from "../../contexts/auth-context";
 import { useToast } from "../../custom-hook";
+import { PasswordInput } from "../../components";
 
 export const Signup = () => {
     const { showToast } = useToast();
@@ -139,14 +140,10 @@ export const Signup = () => {
                     htmlFor="newPassword"
                 >
                     New Password:
-                    <input
-                        id="newPassword"
-                        className="inp"
-                        name="password"
-                        type="password"
-                        placeholder="******" 
-                        minLength="6"
-                        required
+                    <PasswordInput 
+                        id={"newPassword"}
+                        name={"password"}
+                        placeholder={"Minimum 6 charachters"}
                         onChange={updateUserDetails}
                         value={password}
                     />
@@ -164,13 +161,10 @@ export const Signup = () => {
                     htmlFor="confirmPassword"
                 >
                     Confirm Password:
-                    <input
-                        className="inp"
-                        name="confirmPassword"
-                        type="password"
-                        placeholder="Re-enter password" 
-                        minLength="6"
-                        required
+                    <PasswordInput 
+                        id={"confirmPassword"}
+                        name={"confirmPassword"}
+                        placeholder={"Re-enter password"}
                         onChange={updateUserDetails}
                         value={confirmPassword}
                     />

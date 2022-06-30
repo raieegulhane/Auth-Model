@@ -90,3 +90,12 @@
     color: var(--blue2);
     font-weight: bold;
 }
+
+.pw-warning {
+    color: red;
+    font-size: 0.75rem;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+}

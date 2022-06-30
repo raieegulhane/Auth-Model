@@ -8,6 +8,11 @@ export const Login = () => {
     const [loginCreds, setLoginCreds] = useState(initialLoginCreds);
     const { email, password } = loginCreds;
 
+    const updateLoginCreds = (event) => {
+        const { name, value } = event.target;
+        setLoginCreds((loginCreds) => ({ ...loginCreds, [name]: value}))
+    }
+
     return(
         <div className="auth-form-wrapper">
             <form className="auth-form flex-col">
@@ -24,7 +29,8 @@ export const Login = () => {
                         type="email"
                         placeholder="email@example.com"
                         required
-                        // value={email}
+                        value={email}
+                        onChange={updateLoginCreds}
                     />
                 </label>
                 <label
@@ -38,7 +44,8 @@ export const Login = () => {
                         type="password"
                         placeholder="******" 
                         required
-                        // value={password}                   
+                        value={password} 
+                        onChange={updateLoginCreds}
                     />
                 </label>
                 <div className="form-btn-container flex-col">
