@@ -1,10 +1,15 @@
-.nav {
+.nav-wrapper {
     background-color: var(--blue);
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1.5rem 0;
+}
+.nav {
+    display: flex;
+    flex-direction: row;
     gap: 2rem;
-    padding: 1.5rem 3rem;
 }
 
 .navlink {
@@ -21,4 +26,18 @@
     color: white;
     font-weight: bold;
     text-decoration: underline;
+}
+
+.logout-btn {
+    background-color: transparent;
+    color: white;
+    font-size: 1rem;
+    padding: 0.5rem 2rem;
+    border: 2px solid white;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    font-weight: bold;
 }
