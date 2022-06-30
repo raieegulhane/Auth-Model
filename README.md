@@ -1,11 +1,11 @@
 # Authentication-Model
 
-[Preview Link]('https://auth-model.netlify.app/')
+[Preview Link](https://auth-model.netlify.app/)
 
 - Template for authentication in web apps.
-- APIs used from [MockBee]('https://mockbee.netlify.app/').
+- APIs used from [MockBee](https://mockbee.netlify.app/).
 - Framework used - React.
-- Notification toasts using [react-toastify]('https://fkhadra.github.io/react-toastify/introduction').
+- Notification toasts using [react-toastify](https://fkhadra.github.io/react-toastify/introduction).
 
 ### Features:
 - Basic routing with public and private routes - using react-router-dom.
