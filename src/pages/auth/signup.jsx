@@ -1,16 +1,18 @@
 import "./auth.css"
 import "../../styles.css";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom"
 import { signupService } from "../../services/signup-service";
 import { useAuth } from "../../contexts/auth-context";
 import { useToast } from "../../custom-hook";
 
 export const Signup = () => {
     const { showToast } = useToast();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const { authState, authDispatch } = useAuth();
-    const { authToken } = authState;
+    const { isAuth, authToken } = authState;
 
     const initialUserDetails = {
         email: "",
@@ -33,6 +35,10 @@ export const Signup = () => {
         setUserDetails((userDetails) => ({ ...userDetails, [name]: value }))
     }
 
+    useEffect(() => {
+        isAuth && navigate("/home", { replace: true});
+    }, [isAuth]);
+
     const signupHandler = async (event) => {
         event.preventDefault();
 
@@ -54,7 +60,16 @@ export const Signup = () => {
                 }
             })
 
-            localStorage.setItem("auth-token", authToken);
+            // we store this because when you reload a page the reducers will be cleared and the user data that is entered and 
+            // isAuth status will be gone. returned to initial values. to keep the data even after reload. we store this in local
+            // stoarage and we access this data is context later.
+            localStorage.setItem("auth-token", encodedToken);
+            localStorage.setItem("user-data", JSON.stringify(createdUser));
+
+            //here we use the function navigate and not Navigate because we have to go to the requred page on click.
+            //it acts kinda like Link but without the link name
+            navigate("/home", {replace: true});
+            showToast("success", "Signed up");
         } catch (error) {
             console.log("SIGNUP_ERROR: ", error);
             if (error.message.includes(422)) {
@@ -65,7 +80,6 @@ export const Signup = () => {
             showToast("error", "Error occured while signing in.");
         }
     }
-
 
     return(
         <div className="auth-form-wrapper">
@@ -131,11 +145,20 @@ export const Signup = () => {
                         name="password"
                         type="password"
                         placeholder="******" 
+                        minLength="6"
                         required
                         onChange={updateUserDetails}
                         value={password}
                     />
                 </label>
+                {
+                    password.length !== 0 && 
+                    password.length < 6 &&
+                    <div className="pw-warning">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <p>Password should have atleast 6 characters</p>
+                    </div>
+                }
                 <label
                     className="auth-label flex-col"
                     htmlFor="confirmPassword"
@@ -146,11 +169,20 @@ export const Signup = () => {
                         name="confirmPassword"
                         type="password"
                         placeholder="Re-enter password" 
+                        minLength="6"
                         required
                         onChange={updateUserDetails}
                         value={confirmPassword}
                     />
                 </label>
+                {
+                    confirmPassword.length > 0 &&
+                    password !== confirmPassword &&
+                    <div className="pw-warning">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <p>Passwords do not match.</p>
+                    </div>
+                }
                 <div className="form-btn-container flex-col">
                     <button
                         className="auth-btn pri-btn btn"

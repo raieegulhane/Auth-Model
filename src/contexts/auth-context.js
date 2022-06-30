@@ -4,7 +4,23 @@ import { initialAuthData, authReducerFunction } from "../reducers/auth-reducer";
 const AuthContext = createContext({ initialAuthData });
 
 const AuthProvider = ({ children }) => {
-    const [authState, authDispatch] = useReducer(authReducerFunction, { ...initialAuthData });
+    // when page refreshes you still want the data
+    const getInitialAuthVAlues = () => {
+        const authToken = localStorage.getItem("auth-token");
+        const userData = JSON.parse(localStorage.getItem("user-data"));
+
+        if (authToken) {
+            return {
+                isAuth: true,
+                authToken: authToken,
+                userData: userData
+            }
+        }
+
+        return { ...initialAuthData };
+    }
+    
+    const [authState, authDispatch] = useReducer(authReducerFunction, getInitialAuthVAlues());
 
     return(
         <AuthContext.Provider value={{ authState, authDispatch }}>

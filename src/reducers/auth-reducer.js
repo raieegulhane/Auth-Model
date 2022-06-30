@@ -6,14 +6,13 @@ const initialAuthData = {
 
 
 const authReducerFunction = (state, { type, payload }) => {
-    const { isAuth, authToken, userData } = payload;
     switch(type) {
         case "AUTH_INIT":
             return({
                 ...state,
-                isAuth,
-                authToken,
-                userData
+                isAuth: payload.isAuth,
+                authToken: payload.authToken,
+                userData: payload.userData
             });
 
         case "AUTH_CLEAR":
