@@ -45,7 +45,6 @@ export const Login = () => {
                     userData: { ...foundUser }
                 }
             });
-
             localStorage.setItem("auth-token", encodedToken);
             localStorage.setItem("user-data", JSON.stringify(foundUser));
 
