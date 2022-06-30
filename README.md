@@ -22,3 +22,8 @@
   - Password length less than needed.
 - Hide and show password. 
 - Logout.
+
+
+### Note:
+- For apps where all pages are private no changes in code needed. After signup user will be directed to home page.
+- For apps that have public navigation - like ecommerce, login page will be prompted when user tries to access any private page like cart/wishlist or when adding item to cart etc. In such case if user in not logged in and needs to signup, the user should be directed to page they are currently on. Thus changes in code (navigate) needed.
