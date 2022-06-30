@@ -6,6 +6,8 @@
 - APIs used from [MockBee](https://mockbee.netlify.app/).
 - Framework used - React.
 - Notification toasts using [react-toastify](https://fkhadra.github.io/react-toastify/introduction).
+<br><br>
+
 
 ### Features:
 - Basic routing with public and private routes - using react-router-dom.
@@ -22,6 +24,9 @@
   - Password length less than needed.
 - Hide and show password. 
 - Logout.
+<br><br>
+---
+<br><br>
 
 
 ### Note:
