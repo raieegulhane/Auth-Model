@@ -10,9 +10,9 @@ export const SiteRoutes = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/" element={<PrivateRoutes />}>
-                <Route path="/" element={<Home />} />
-                <Route path="/home" element={<Home />} />
                 <Route path="/private1" element={<Private1 />} />
                 <Route path="/private2" element={<Private2 />} />
                 <Route path="/private3" element={<Private3 />} />
